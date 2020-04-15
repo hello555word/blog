@@ -9,6 +9,8 @@ admin.get('/login',(req,res)=>{
       
     res.render('admin/login')
 })
+
+admin.post('')
 // 用户列表路由
 admin.post('/admin/login',(req,res)=>{
   res.render(req)
