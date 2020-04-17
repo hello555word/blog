@@ -1,5 +1,12 @@
 // 导入 express框架
 const express = require('express');
+
+// 引入express - session
+const session = require('express-session')
+
+// 引入body-parser 用来处理post
+const bodyParser = require('body-parser')
+
 // 创建网站
 const app = express();
 require('./model/connect');
@@ -9,12 +16,11 @@ require('./model/connect');
 const path = require('path');
 // path.join(__dirname,'public')
 
-// 引入body-parser 用来处理post
-const bodyParser = require('body-parser')
 // 处理post请求
                                 //    flase 用querysting    true 用 qs
 app.use(bodyParser.urlencoded({extended:false}))
 
+app.use(session({secret:'secret key'}))
 
 // 设置模板路径
 app.set('views', path.join(__dirname, 'views'))

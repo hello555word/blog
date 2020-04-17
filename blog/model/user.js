@@ -1,6 +1,11 @@
 // 创建用户集合
 
 const mongoose = require('mongoose');
+
+// hash加密
+const bcrypt = require('bcryptjs');
+
+
 // 创建集合规则
 const userSchema = new mongoose.Schema({
     username: {             // 用户名
@@ -17,16 +22,17 @@ const userSchema = new mongoose.Schema({
         type: String,       //字符串类型
         required: true,      //必填
     },
-role:{                          //角色
-    type:String,
-    role:true ,
-},
-state:{
-    type:Number,
-    default:0                   //0是启用状态 1是关闭状态
-}
+    role: {                          //角色
+        type: String,
+        role: true,
+    },
+    state: {
+        type: Number,
+        default: 0                   //0是启用状态 1是关闭状态
+    }
 
 })
+
 
 // 创建结合、
 const User = mongoose.model('User', userSchema);
@@ -40,13 +46,32 @@ const User = mongoose.model('User', userSchema);
 //     state:0
 // }).then(()=>{
 //     console.log('创建成功');
-    
+
 // }).catch(()=>{
 //     console.log('创建失败');
 
 // })
+async function createUser() {
+ 
+    const salt = await bcrypt.genSalt(10)
+    const pass = await bcrypt.hash('123456', salt)
+    const user = await User.create({  //测试代码啊
+        username: 'lichangying',
+        email: '285777553@qq.com',
+        password: pass,
+        role: 'admin',
+        state: 0
+    }).then(() => {
+        console.log('创建成功');
 
+    }).catch(() => {
+        console.log('创建失败');
+
+    })
+}
+// createUser()
 // 将用户集合作为模块成员进行导出
-module.exports={
-    User:User,
+
+module.exports = {
+    User: User,
 }
