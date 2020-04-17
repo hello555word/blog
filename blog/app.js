@@ -36,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 const home = require('./route/home.js');
 const admin = require('./route/admin.js');
 
+app.use('/admin',require('./middleware/loginGuard'))
 // 匹配路由
 app.use('/admin', admin);
 app.use('/home', home);
