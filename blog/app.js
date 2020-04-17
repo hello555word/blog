@@ -9,6 +9,13 @@ require('./model/connect');
 const path = require('path');
 // path.join(__dirname,'public')
 
+// 引入body-parser 用来处理post
+const bodyParser = require('body-parser')
+// 处理post请求
+                                //    flase 用querysting    true 用 qs
+app.use(bodyParser.urlencoded({extended:false}))
+
+
 // 设置模板路径
 app.set('views', path.join(__dirname, 'views'))
     // 设置模板后缀
