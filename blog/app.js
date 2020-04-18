@@ -48,6 +48,11 @@ app.use('/admin',require('./middleware/loginGuard'))
 app.use('/admin', admin);
 app.use('/home', home);
 
+app.use((err,req,res,next)=>{
+
+    const result=JSON.parse(err)
+    res.redirect(`${result.path}?message=${result.message}`)
+})
 
 
 app.listen(80, "127.0.0.1");

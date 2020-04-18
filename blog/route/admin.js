@@ -19,7 +19,7 @@ admin.get('/login', require('./admin/loginPage'))
 // 登录功能
 admin.post('/login', require('./admin/login'))
 
-// 渲染列表页面
+// 渲染用户列表页面
 admin.get('/user', require('./admin/userPage'))
 
 // 退出登录功能
