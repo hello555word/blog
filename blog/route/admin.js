@@ -11,24 +11,24 @@ const express = require('express');
 // 创建展示页面的路由
 const admin = express.Router();
 
-admin.get('/login', (req, res) => {
-  // res.send('欢迎到博客的登录页面')
-  // console.log(req);
-
-  res.render('admin/login')
-})
+// 渲染登录页面
+admin.get('/login', require('./admin/loginPage'))
 
 
 // 用户列表路由   获取form表单的post数据需要用第三方模块  下载 body-parser
 // 登录功能
 admin.post('/login', require('./admin/login'))
 
-admin.get('/user', (req, res) => {
-  res.render('admin/user.art',
-  // {
-  //   msg:req.session.username     用app.locals.info抛出
-  // }
-  )
-})
+// 渲染列表页面
+admin.get('/user', require('./admin/userPage'))
 
-module.exports = admin;
+// 退出登录功能
+admin.get('/logout', require('./admin/logout'))
+
+// 创建用户编辑页面
+admin.get('/user-edit', require('./admin/user-edit.js'))
+
+// 实现用户添加功能
+admin.post('/user-edit',require('./admin/user-edit-fn.js'))
+
+  module.exports = admin;

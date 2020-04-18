@@ -20,7 +20,13 @@ const path = require('path');
                                 //    flase 用querysting    true 用 qs
 app.use(bodyParser.urlencoded({extended:false}))
 
-app.use(session({secret:'secret key'}))
+app.use(session({
+    secret:'secret key',       // 设置session
+    saveUninitialized:false, //删除后不保存cookie 
+    cookie:{
+        maxAge:24*24*60*60*1000  //有效时间
+    }
+}))
 
 // 设置模板路径
 app.set('views', path.join(__dirname, 'views'))
@@ -36,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 const home = require('./route/home.js');
 const admin = require('./route/admin.js');
 
+// 中间件拦截判断
 app.use('/admin',require('./middleware/loginGuard'))
 // 匹配路由
 app.use('/admin', admin);
