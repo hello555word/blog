@@ -7,6 +7,7 @@ const session = require('express-session')
 // 引入body-parser 用来处理post
 const bodyParser = require('body-parser')
 
+
 // 创建网站
 const app = express();
 require('./model/connect');
@@ -17,20 +18,20 @@ const path = require('path');
 // path.join(__dirname,'public')
 
 // 处理post请求
-                                //    flase 用querysting    true 用 qs
-app.use(bodyParser.urlencoded({extended:false}))
+//    flase 用querysting    true 用 qs
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(session({
-    secret:'secret key',       // 设置session
-    saveUninitialized:false, //删除后不保存cookie 
-    cookie:{
-        maxAge:24*24*60*60*1000  //有效时间
+    secret: 'secret key',       // 设置session
+    saveUninitialized: false, //删除后不保存cookie 
+    cookie: {
+        maxAge: 24 * 24 * 60 * 60 * 1000  //有效时间
     }
 }))
 
 // 设置模板路径
 app.set('views', path.join(__dirname, 'views'))
-    // 设置模板后缀
+// 设置模板后缀
 app.set('view engine', 'art');
 // 设置模板引擎
 app.engine('art', require('express-art-template'));
@@ -43,15 +44,25 @@ const home = require('./route/home.js');
 const admin = require('./route/admin.js');
 
 // 中间件拦截判断
-app.use('/admin',require('./middleware/loginGuard'))
+app.use('/admin', require('./middleware/loginGuard'))
 // 匹配路由
 app.use('/admin', admin);
 app.use('/home', home);
 
-app.use((err,req,res,next)=>{
+app.use((err, req, res, next) => {
 
-    const result=JSON.parse(err)
-    res.redirect(`${result.path}?message=${result.message}`)
+    const result = JSON.parse(err)
+    // let obj = { path: '/admin/user-edit', message: '密码比对失败。不能进行用户信息修改'，id: id }
+    let params=[];
+    for (let attr in result) {
+     
+        if (attr != 'path') {
+            params.push(attr + '=' + result[attr])
+        }
+
+    }
+
+    res.redirect(`${result.path}?${params.join('&')}`)
 })
 
 
