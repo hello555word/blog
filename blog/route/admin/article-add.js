@@ -6,7 +6,7 @@ const path = require('path')
 module.exports = (req, res) => {
 
     // 1 创建表单解析对象
-    const form = new IncomingForm();
+    const form = new formidable.IncomingForm();
 
     // 2配置上传文件的存放位置
     form.uploadDir = path.join(__dirname, '../', '../', 'public', 'uploads')
