@@ -55,5 +55,5 @@ app.use((err,req,res,next)=>{
 })
 
 
-app.listen(80, "127.0.0.1");
+app.listen(8080, "127.0.0.1");
 console.log('网站服务器启动成功，请访问localhost');
