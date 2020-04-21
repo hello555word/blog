@@ -1,14 +1,10 @@
- 
- 
- 
- function serializeToJson(form) {
-            var result = {}
-            // serializeArray()获取表单项所有内容
-            // name:'email',value:'密码'
-            var f = form.serializeArray();
-            f.forEach(function(item){
-                // email:"mima "
-                result[item.name]=item.value;
-                return result
-            })
-        }
+function serializeToJson(form) {
+    var result = {};
+    // [{name: 'email', value: '用户输入的内容'}]
+    var f =  form.serializeArray();  
+    f.forEach(function (item) {
+        // result.email
+        result[item.name] = item.value;
+    });
+    return result;
+}

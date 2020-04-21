@@ -1,50 +1,40 @@
-// 引入框架 第三方
+// 引用expess框架
 const express = require('express');
-// 引入hash加密  第三方
-// const bcrypt = require('bcryptjs')  
-
-
-// 导入数据库的用户集合的构造函数
-// const { User } = require('../model/user');
-//  console.log(User);
-
-// 创建展示页面的路由
+// 创建博客展示页面路由
 const admin = express.Router();
 
 // 渲染登录页面
-admin.get('/login', require('./admin/loginPage'))
+admin.get('/login', require('./admin/loginPage'));
 
+// 实现登录功能
+admin.post('/login', require('./admin/login'));
 
-// 用户列表路由   获取form表单的post数据需要用第三方模块  下载 body-parser
-// 登录功能
-admin.post('/login', require('./admin/login'))
+// 创建用户列表路由
+admin.get('/user', require('./admin/userPage'));
 
-// 渲染用户列表页面
-admin.get('/user', require('./admin/userPage'))
+// 实现退出功能
+admin.get('/logout', require('./admin/logout'));
 
-// 退出登录功能
-admin.get('/logout', require('./admin/logout'))
+// 创建用户编辑页面路由
+admin.get('/user-edit', require('./admin/user-edit'));
 
-// 创建用户编辑页面
-admin.get('/user-edit', require('./admin/user-edit.js'))
+// 创建实现用户添加功能路由
+admin.post('/user-edit', require('./admin/user-edit-fn'));
 
-// 实现用户添加功能
-admin.post('/user-edit',require('./admin/user-edit-fn.js'))
-//修改功能
-admin.post('/user-modify',require('./admin/user-modify.js'))
+// 用户修改功能路由
+admin.post('/user-modify', require('./admin/user-modify'));
 
-admin.get('/delete', require('./admin/user-delete.js'))
+// 用户删除功能路由
+admin.get('/delete', require('./admin/user-delete'));
 
-// 文章列表路由
-
-admin.get('/article',require('./admin/article.js'))
+// 文章列表页面路由
+admin.get('/article', require('./admin/article'));
 
 // 文章编辑页面路由
-admin.get('/article-edit', require('./admin/article-edit.js'))
+admin.get('/article-edit', require('./admin/article-edit'));
 
-//文章功能的路由
-admin.post('/article-add', require('./admin/article-add.js'))
+// 实现文章添加功能的路由
+admin.post('/article-add', require('./admin/article-add'))
 
-
-
-  module.exports = admin;
+// 将路由对象做为模块成员进行导出
+module.exports = admin;

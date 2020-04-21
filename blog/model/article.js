@@ -1,40 +1,36 @@
-// 创建用户集合
-
+// 1.引入mongoose模块
 const mongoose = require('mongoose');
-const Joi = require('joi')
-// hash加密
-const bcrypt = require('bcryptjs');
 
-
-// 创建集合规则
+// 2.创建文章集合规则
 const articleSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        maxlength: 30,
-        minlength: 4,
-        required: [true, '请填写标题']
-    },
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: [true, '请填作者']
-    },
-    publishDate: {
-        type: Date,
-        default: Date.now,
-    },
-    cover: {
-        type: String,
-        default: null
-    },
-    content: {
-        type: String
-    }
-})
-const Article = mongoose.model( 'Article');
+	title: {
+		type: String,
+		maxlength: 20,
+		minlength: 4,
+		required: [true, '请填写文章标题']
+	},
+	author: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+		required: [true, '请传递作者']
+	},
+	publishDate: {
+		type: Date,
+		default: Date.now
+	},
+	cover: {
+		type: String,
+		default: null
+	},
+	content: {
+		type: String
+	}
+});
 
-module.exports={
+// 3.根据规则创建集合
+const Article = mongoose.model('Article', articleSchema);
 
-    Article: Article
-
+// 4.将集合做为模块成员进行导出
+module.exports = {
+	Article
 }

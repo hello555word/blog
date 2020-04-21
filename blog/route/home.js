@@ -1,10 +1,11 @@
-// 引入框架
-const express = require ('express');
-// 创建展示页面的路由
-const home =express.Router();
+// 引用expess框架
+const express = require('express');
+// 创建博客展示页面路由
+const home = express.Router();
 
-home.get('/',(req,res)=>{
-    res.send('欢迎到博客的首页页面')
-})
+home.get('/', (req, res) => {
+	res.send('欢迎来到博客首页')
+});
 
-module.exports=home;
+// 将路由对象做为模块成员进行导出
+module.exports = home;
