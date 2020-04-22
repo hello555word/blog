@@ -1,0 +1,11 @@
+{
+    "title": "博客管理系统------当前是开发环境",
+    "db":{
+        "user":"lily",   
+        "host":"localhost",
+        "port":"27017",
+        "name":"blog" 
+    
+
+    }
+}
