@@ -32,5 +32,5 @@ const Article = mongoose.model('Article', articleSchema);
 
 // 4.将集合做为模块成员进行导出
 module.exports = {
-	Article
+	Article: Article 
 }

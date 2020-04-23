@@ -5,5 +5,6 @@ module.exports = (req, res) => {
 		res.clearCookie('connect.sid');
 		// 重定向到用户登录页面
 		res.redirect('/admin/login');
+		req.app.locals.userInfo=null;
 	});
 }

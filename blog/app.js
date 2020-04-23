@@ -22,10 +22,11 @@ require('./model/connect');
 app.use(bodyPaser.urlencoded({ extended: false }));
 // 配置session
 app.use(session({
-	secret: 'secret key',
+	resave: false,//添加 resave 选项
+	secret: 'secret key',// 建议使用 128 个字符的随机字符串
 	saveUninitialized: false,
 	cookie: {
-		maxAge: 24 * 60 * 60 * 1000
+		maxAge: 24 * 60 * 60 * 1000//cookie 保留时间
 	}
 }));
 

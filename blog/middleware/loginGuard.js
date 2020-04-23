@@ -6,6 +6,11 @@ const guard = (req, res, next) => {
 	if (req.url != '/login' && !req.session.username) {
 		res.redirect('/admin/login');
 	} else {
+		if (req.session.role=='normal'){
+			res.redirect('/home/');
+			return;
+		}
+			
 		// 用户是登录状态 将请求放行
 		next();
 	}
